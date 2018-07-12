@@ -1,6 +1,7 @@
 package task_c;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -23,10 +24,21 @@ public class task_cReducer extends Reducer<Text, LongWritable, Text, LongWritabl
 	}
 
 	@Override
-	protected void reduce(Text arg0, Iterable<LongWritable> arg1,
-			Reducer<Text, LongWritable, Text, LongWritable>.Context arg2) throws IOException, InterruptedException {
+	protected void reduce(Text key, Iterable<LongWritable> values,
+			Reducer<Text, LongWritable, Text, LongWritable>.Context content) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		super.reduce(arg0, arg1, arg2);
+		Long sum=0L;
+		Long count=0L;
+		Long house_price=0L;
+		//设置迭代器
+		Iterator<LongWritable> iterator=values.iterator();
+		while(iterator.hasNext()){
+			house_price=iterator.next().get();
+			sum+=house_price;
+			count++;
+		}
+		Long average =(Long)sum/count;
+		content.write(key, new LongWritable(average));
 	}
 
 	

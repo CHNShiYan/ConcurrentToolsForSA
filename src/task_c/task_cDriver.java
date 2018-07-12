@@ -18,7 +18,7 @@ public class task_cDriver {
 		}
 		//获取输入和输出的路径参数
 		Path inputPath=new Path(args[0]);
-		Path outPath=new Path(args[1]);
+		Path outputPath=new Path(args[1]);
 		
 		//创建配置，实例化Job
 		Configuration conf=new Configuration();
@@ -30,6 +30,17 @@ public class task_cDriver {
 		job.setReducerClass(task_cReducer.class);
 		
 		//设置输出的键值类型
+		job.setMapOutputKeyClass(Text.class);
+		job.setMapOutputValueClass(LongWritable.class);
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(LongWritable.class);
+				
+		//设置输入和输出的文件格式以及路径
+		FileInputFormat.setInputPaths(job, inputPath);
+		FileOutputFormat.setOutputPath(job, outputPath);
+				
+		//执行Job并等待完成
+		boolean flag=job.waitForCompletion(true);
 	}
 
 }
