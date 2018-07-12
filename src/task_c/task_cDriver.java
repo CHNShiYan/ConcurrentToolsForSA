@@ -31,16 +31,16 @@ public class task_cDriver {
 		
 		//设置输出的键值类型
 		job.setMapOutputKeyClass(Text.class);
-		job.setMapOutputValueClass(LongWritable.class);
+		job.setMapOutputValueClass(Text.class);
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(LongWritable.class);
+		job.setOutputValueClass(Text.class);
 				
 		//设置输入和输出的文件格式以及路径
 		FileInputFormat.setInputPaths(job, inputPath);
 		FileOutputFormat.setOutputPath(job, outputPath);
 				
 		//执行Job并等待完成
-		job.waitForCompletion(true);
+		boolean flag=job.waitForCompletion(true);
 	}
 
 }
