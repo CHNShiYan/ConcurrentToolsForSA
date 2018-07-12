@@ -40,7 +40,7 @@ public class task_cDriver {
 		FileOutputFormat.setOutputPath(job, outputPath);
 				
 		//执行Job并等待完成
-		boolean flag=job.waitForCompletion(true);
+		job.waitForCompletion(true);
 	}
 
 }
