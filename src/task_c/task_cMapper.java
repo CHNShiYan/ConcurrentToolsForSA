@@ -38,7 +38,6 @@ public class task_cMapper extends Mapper<Object, Text, Text, Text>{
 			String house_area=tokenizerLine.nextToken();//区域部分
 			String house_type=tokenizerLine.nextToken();//类型部分
 			String house_price=tokenizerLine.nextToken();//均价部分
-			System.out.println(house_area+"***"+house_type+"***"+house_price);
 			Text name=new Text(house_area);
 			//Long house_priceLong=Long.parseLong(house_price);
 			context.write(name, new Text(house_type+" "+house_price));

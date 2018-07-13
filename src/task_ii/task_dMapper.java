@@ -1,14 +1,11 @@
-package task_e;
+package task_ii;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
-
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class task_eMapper extends Mapper<Object, Text, Text, Text>{
+public class task_dMapper extends Mapper<Object, Text, Text, Text>{
 
 	@Override
 	protected void setup(Mapper<Object, Text, Text,  Text>.Context context)
@@ -35,26 +32,12 @@ public class task_eMapper extends Mapper<Object, Text, Text, Text>{
 		while(tokenizer.hasMoreTokens()){
 			//每行按制表符划分
 			StringTokenizer tokenizerLine=new StringTokenizer(tokenizer.nextToken(),"\t");
-			String house_propertyright=tokenizerLine.nextToken();//产权年限
 			String house_area=tokenizerLine.nextToken();//区域部分
+			String house_type=tokenizerLine.nextToken();//类型部分
 			String house_totalprice=tokenizerLine.nextToken();//总价部分
-			if (house_totalprice != "-1") {
-				if (house_propertyright == "0" || house_propertyright == "1") {
-					Text name=new Text(house_propertyright);
-					context.write(name, new Text(house_area+" "+house_totalprice));
-				}
-				else
-				{
-					if (house_propertyright == "2") {
-						Text name=new Text("0");
-						context.write(name, new Text(house_area+" "+house_totalprice));
-						name=new Text("1");
-						context.write(name, new Text(house_area+" "+house_totalprice));
-					}
-				}
-				
-				
-				
+			if (!house_totalprice.equals("-1")) {
+				Text name=new Text(house_area);
+				context.write(name, new Text(house_type+" "+house_totalprice));
 			}
 			
 		}
