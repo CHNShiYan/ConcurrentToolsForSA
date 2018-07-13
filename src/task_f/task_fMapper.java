@@ -38,23 +38,21 @@ public class task_fMapper extends Mapper<Object, Text, Text, Text>{
 			String house_propertyright=tokenizerLine.nextToken();//产权年限
 			String house_area=tokenizerLine.nextToken();//区域部分
 			String house_totalprice=tokenizerLine.nextToken();//总价部分
-			if (house_totalprice != "-1") {
-				if (house_propertyright == "0" || house_propertyright == "1") {
+			System.out.println(house_propertyright+house_area+house_totalprice);
+			if (!house_totalprice.equals("-1")) {
+				if (house_propertyright.equals("1")|| house_propertyright.equals("0")) {
 					Text name=new Text(house_propertyright);
 					context.write(name, new Text(house_area+" "+house_totalprice));
 				}
 				else
 				{
-					if (house_propertyright == "2") {
-						Text name=new Text("40");
+					if (house_propertyright.equals("2")) {
+						Text name=new Text("0");
 						context.write(name, new Text(house_area+" "+house_totalprice));
-						name=new Text("70");
-						context.write(name, new Text(house_area+" "+house_totalprice));
+						Text name1=new Text("1");
+						context.write(name1, new Text(house_area+" "+house_totalprice));
 					}
 				}
-				
-				
-				
 			}
 			
 		}
