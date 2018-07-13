@@ -1,4 +1,4 @@
-package task_d;
+package task_f;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.io.Text;
 
-public class task_dDriver {
+public class task_fDriver {
 	public static void main(String[] args)  throws IOException, ClassNotFoundException, InterruptedException {
 		if (args.length<2) {
 			System.out.println("args less");
@@ -22,12 +22,12 @@ public class task_dDriver {
 		
 		//创建配置，实例化Job
 		Configuration conf=new Configuration();
-		Job job =Job.getInstance(conf,"task_d");
+		Job job =Job.getInstance(conf,"task_f");
 		
 		//设置入口
-		job.setJarByClass(task_dDriver.class);
-		job.setMapperClass(task_dMapper.class);
-		job.setReducerClass(task_dReducer.class);
+		job.setJarByClass(task_fDriver.class);
+		job.setMapperClass(task_fMapper.class);
+		job.setReducerClass(task_fReducer.class);
 		
 		//设置输出的键值类型
 		job.setMapOutputKeyClass(Text.class);
