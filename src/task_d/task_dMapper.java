@@ -38,7 +38,7 @@ public class task_dMapper extends Mapper<Object, Text, Text, Text>{
 			String house_area=tokenizerLine.nextToken();//区域部分
 			String house_type=tokenizerLine.nextToken();//类型部分
 			String house_totalprice=tokenizerLine.nextToken();//总价部分
-			if (house_totalprice != "-1") {
+			if (!house_totalprice.equals("-1")) {
 				Text name=new Text(house_area);
 				context.write(name, new Text(house_type+" "+house_totalprice));
 			}

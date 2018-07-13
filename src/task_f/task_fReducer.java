@@ -34,18 +34,22 @@ public class task_fReducer extends Reducer<Text, Text, Text, Text>{
 		//设置迭代器
 		Iterator<Text> iterator=values.iterator();
 		while(iterator.hasNext()){
+			
 			String[] house_area_totalprice=iterator.next().toString().split(" ");
 			String house_area=house_area_totalprice[0];
 			Double house_totalprice=Double.parseDouble(house_area_totalprice[1]);
+			
 			if (cnt.containsKey(house_area))  
 				cnt.put(house_area, cnt.get(house_area) + 1);  
 	        else
 	           	cnt.put(house_area, 1);  
+			
 			if (sum.containsKey(house_area))  
 				sum.put(house_area, sum.get(house_area) + house_totalprice);  
 	        else
 	        	sum.put(house_area, house_totalprice);
 		}
+		
 		for(String type : cnt.keySet()){
 			double average=sum.get(type)/cnt.get(type);
 			content.write(new Text(key+"\t"+type), new Text(String.valueOf(average)));
